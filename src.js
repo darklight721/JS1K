@@ -74,20 +74,17 @@ m = Math.ceil(img[0].width/(p+s)); // max number of pixelated columns
 		
 		for (var y = 0; y < img[h].height; y+=p+s)
 		{
-			for (var x = 0; x < i*(p+s); x+=p+s)
+			if (isTextOnPixel(h,i*(p+s),y) === 1)
 			{
-				if (isTextOnPixel(h,x,y) === 1)
-				{
-					// if pixel contains text, get the opposite color
-					a.fillStyle = "rgb("+(255-r)+","+(255-g)+","+(255-v)+")";
-				}
-				else
-				{
-					a.fillStyle = "rgb("+r+","+g+","+v+")";
-				}
-				// Draw rect here
-				a.fillRect(x,y,p,p);
+				// if pixel contains text, get the opposite color
+				a.fillStyle = "rgb("+(255-r)+","+(255-g)+","+(255-v)+")";
 			}
+			else
+			{
+				a.fillStyle = "rgb("+r+","+g+","+v+")";
+			}
+			// Draw rect here
+			a.fillRect(i*(p+s),y,p,p);
 		}
 		
 		i = (i+1) % m; // increment
